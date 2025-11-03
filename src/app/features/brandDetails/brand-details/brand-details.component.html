@@ -1,0 +1,61 @@
+<section class="bg-gray-50 min-h-screen py-10 px-5">
+  <!-- ✅ تفاصيل البراند -->
+  <div class="text-center mb-12">
+    @if (!brandDetails) {
+      <p class="text-gray-500 text-lg animate-pulse">Loading brand details...</p>
+    } @else {
+      <img
+        [src]="brandDetails.image"
+        [alt]="brandDetails.name"
+        class="w-36 h-36 object-contain mx-auto rounded-full shadow-md border border-green-200"
+      />
+     
+    }
+  </div>
+
+  
+  <div class="container mx-auto px-4 lg:px-8">
+    <h2 class="text-3xl font-semibold text-green-800 text-center mb-10">
+      Products by {{ brandDetails?.name }}
+    </h2>
+
+    @if (!brandProducts?.length) {
+      <p class="text-center text-gray-500">No products available for this brand.</p>
+    } @else {
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        @for (product of brandProducts; track product._id) {
+          <div
+            class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-lg hover:-translate-y-1 transition duration-300 cursor-pointer"
+            [routerLink]="['/details', product._id]"
+          >
+            <div class="bg-gray-100 h-56 flex items-center justify-center">
+              <img
+                [src]="product.imageCover"
+                [alt]="product.title"
+                class="object-contain h-full w-full p-4 transition-transform duration-300 hover:scale-105"
+              />
+            </div>
+            <div class="p-4 text-center">
+              <h3 class="text-lg font-semibold text-gray-800 truncate">
+                {{ product.title }}
+              </h3>
+              <p class="text-green-600 font-bold mt-2">
+                {{ product.price | currency }}
+              </p>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+
+  <div class="flex justify-center mt-12">
+    <button
+      routerLink="/brands"
+      class="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded-xl transition duration-300 shadow-md"
+    >
+      Back to Brands
+    </button>
+  </div>
+</section>

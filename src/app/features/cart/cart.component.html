@@ -1,0 +1,65 @@
+<section class="bg-gray-300">
+  <div class="container mx-auto p-5 grid sm:grid-cols-12 gap-10">
+
+    <div class="col-span-8 p-4 shadow rounded-lg">
+      <div class="flex items-center space-x-2 pb-3 my-3">
+        <h1 class="text-3xl">Cart</h1>
+        <span class="text-orange-700">{{cartDetails.products.length}} item</span>
+      </div>
+      
+@for (item of cartDetails.products; track item.product._id) {
+  <div class="bg-white grid sm:grid-cols-12 p-4 mb-5 shadow rounded-lg space-x-3">
+        <div class="col-span-1">
+          <img [src]=item.product.imageCover class="w-full" [alt]=item.product.title />
+        </div>
+
+        <div class="col-span-11 flex items-center justify-between ">
+          
+          <div >
+            <h3 class="text-xl">{{item.product.title}}</h3>
+            <div class=" flex items-center space-x-2 py-2.5">
+                <div class="bg-gray-300 rounded-lg flex border-2 items-center space-x-6 p-1">
+                    <button (click)="updateCart(item.product._id,item.count-1)"><i class="fas fa-minus cursor-pointer"></i></button>
+              <span>{{item.count}}</span>
+              <button (click)="updateCart(item.product._id,item.count+1)"><i class="fas fa-plus cursor-pointer"></i></button>
+            </div>
+              <button (click)="removeProductInCart(item.product._id)"><i class="fa fa-trash-can cursor-pointer"></i></button>
+            </div>
+            
+          </div>
+
+          <h3>{{item.price * item.count}}EGP</h3>
+        </div>
+
+        
+
+      </div>
+    
+
+}
+    
+      
+  
+        
+
+      </div>
+    
+
+    
+
+
+    <!-- المفتاح هنا هو self-start
+بيخلي العنصر يلتصق بأعلى الصف فقط ومش ياخد نفس ارتفاع الصف كله.
+-->
+
+
+    <div class="col-span-4 bg-white p-4 shadow rounded-lg self-start ">
+      <h2 class="text-2xl">Order Summary</h2>
+      <div class="flex items-center justify-between py-3">
+        <h3>Total Price</h3>
+        <h3>{{cartDetails.totalCartPrice}}</h3>
+      </div>
+      <button [routerLink]="['/checkout',cartDetails._id]" class="btn">Proceed To CheckOut</button>
+    </div>
+  </div>
+</section>

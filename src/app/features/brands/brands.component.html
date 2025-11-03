@@ -1,0 +1,23 @@
+<section class="bg-gray-50 py-10 px-5 min-h-screen">
+    <h1 class="text-4xl font-bold text-green-700 text-center mb-10">Brands</h1>
+  
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+      @for (brand of brands; track brand._id) {
+        <div
+          class="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition cursor-pointer"
+          [routerLink]="['/brands', brand._id]"
+
+        >
+          <img
+            [src]="brand.image"
+            [alt]="brand.name"
+            class="w-full h-48 object-cover hover:scale-110 transition-transform duration-300"
+          />
+          <div class="p-4 text-center">
+            <h2 class="text-xl font-semibold text-gray-800">{{ brand.name }}</h2>
+          </div>
+        </div>
+      }
+    </div>
+  </section>
+  

@@ -1,0 +1,21 @@
+<section class="bg-gray-50 py-10 px-5 min-h-screen">
+  <h1 class="text-4xl font-bold text-green-700 text-center mb-10">Categories</h1>
+
+  <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
+    @for (cat of categories; track cat.name) {
+    <div
+      class="bg-white rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105 cursor-pointer"
+      [routerLink]="['/categories', cat._id]"
+    >
+      <img
+        [src]="cat.image"
+        [alt]="cat.name"
+        class="w-full h-48 object-cover transition-transform duration-300 hover:scale-105"
+      />
+      <div class="p-4">
+        <h2 class="text-xl font-semibold text-gray-800 text-center">{{ cat.name }}</h2>
+      </div>
+    </div>
+    }
+  </div>
+</section>
